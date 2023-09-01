@@ -104,7 +104,10 @@ export default function Home() {
     }
   };
   return (
-    <div>
+    <div className={styles.mainContainer}>
+      <h1> Finch Sandbox demo</h1>
+      <p> This demo is made by Miche Wong. </p>
+      <a href="https://github.com/michellewong793/finch-app">View on Github repository</a>
       <select value={selectedProvider} onChange={handleProviderChange}>
         <option value="">Select a provider</option>
         {providers.map((provider) => (

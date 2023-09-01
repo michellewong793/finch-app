@@ -1,11 +1,11 @@
 import React from 'react';
-
+import styles from './styles.module.css'
 function IndividualDetails({ responses }) {
   const individual = responses.body
 
 
   return (
-    <div>
+    <div className={styles.individualResults}>
       <h2>Employment Information</h2>
       <p><strong>ID:</strong> {individual.id}</p>
       <p><strong>First Name:</strong> {individual.first_name}</p>
