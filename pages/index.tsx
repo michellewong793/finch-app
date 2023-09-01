@@ -105,10 +105,15 @@ export default function Home() {
   };
   return (
     <div className={styles.mainContainer}>
-      <h1> Finch Sandbox demo</h1>
-      <p> This demo is made by Miche Wong. </p>
-      <a href="https://github.com/michellewong793/finch-app">View on Github repository</a>
-      <select value={selectedProvider} onChange={handleProviderChange}>
+      <h1> Welcome to the Finch sandbox demo! </h1>
+      <a href="https://github.com/michellewong793/finch-app">View Github repository</a>
+      <br/>
+      <br/>
+      {sandboxCreated ? <p>Sandbox Successfully Created! Check out company data, directory for more.</p> : <p>No sandbox created yet. Choose a provider to see more.</p>}
+
+      <div className={styles.actionRow}>
+
+      <select  className={styles.button} value={selectedProvider} onChange={handleProviderChange}>
         <option value="">Select a provider</option>
         {providers.map((provider) => (
           <option key={provider} value={provider}>
@@ -116,25 +121,19 @@ export default function Home() {
           </option>
         ))}
       </select>
-      <button onClick={handleCreateSandbox} disabled={isCreatingSandbox}>
+      <button className={styles.button} onClick={handleCreateSandbox} disabled={isCreatingSandbox}>
         {isCreatingSandbox ? 'Creating Sandbox...' : 'Create Finch Sandbox with selected provider'}
       </button>
-      <button onClick={handleFetchCompanyData}>Fetch Company Data</button>
+      <button  className={styles.button} onClick={handleFetchCompanyData}>Fetch Company Data</button>
       {!isFetchCompanyDataImplemented && <p>The company data endpoint is not implemented for this provider.</p>}
 
-      <button onClick={handleFetchCompanyDirectory}>Fetch Company Directory</button>
+      <button  className={styles.button} onClick={handleFetchCompanyDirectory}>Fetch Company Directory</button>
       {!isFetchCompanyDirectoryImplemented && <p>The company directory endpoint is not implemented for this provider.</p>}
-
+      </div>
       <div className={styles.flexRow}>
         <div className={styles.column}>
-          {sandboxCreated ? <p>Sandbox Successfully Created! Check out company data, directory for more.</p> : <p>No sandbox created yet. Choose a provider to see more.</p>}
 
-          {directoryData ? (
-            <Directory directoryData={directoryData} />
-          ) : (
-            <p> Try looking up the directory. </p>
-          )}
-
+        
 {companyData ? (
         <div className={styles.companyData}>
           <div>
@@ -182,6 +181,12 @@ export default function Home() {
       ) : (
         <p>Try fetching company data.</p>
       )}
+        {directoryData ? (
+            <Directory directoryData={directoryData} />
+          ) : (
+            <p> Try looking up the directory. </p>
+          )}
+
            
         </div>
       </div>
