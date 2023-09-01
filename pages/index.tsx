@@ -1,9 +1,29 @@
 import { useState } from 'react';
 import Directory from './components/Individual';
 import styles from './components/styles.module.css'
-import Nav from './components/Nav';
 
-const providers = ['gusto', 'adp_run', 'bamboo_hr', 'bamboo_hr_api', 'bob', 'humaans', 'insperity'];
+const providers = ['gusto', 'adp_run', 'bamboo_hr', 'bamboo_hr_api', 'bob', 'humaans', 'insperity', "justworks",
+"namely",
+"paychex_flex",
+"paychex_flex_api",
+"paycom",
+"paycom_api",
+"paylocity",
+"paylocity_api",
+"personio",
+"quickbooks",
+"rippling",
+"sage_hr",
+"sapling",
+"sequoia_one",
+"square_payroll",
+"trinet",
+"trinet_api",
+"ulti_pro",
+"wave",
+"workday",
+"zenefits",
+"zenefits_api"];
 
 export default function Home() {
   const [selectedProvider, setSelectedProvider] = useState('');
@@ -14,6 +34,8 @@ export default function Home() {
   const [sandboxCreated, setSandboxCreated] = useState(false);
   const [isFetchCompanyDataImplemented, setIsFetchCompanyDataImplemented] = useState(true);
   const [isFetchCompanyDirectoryImplemented, setIsFetchCompanyDirectoryImplemented] = useState(true);
+  const [isCreatingSandbox, setIsCreatingSandbox] = useState(false);
+
 
   const handleProviderChange = (event) => {
     setSelectedProvider(event.target.value);
@@ -57,6 +79,8 @@ export default function Home() {
 
   const handleCreateSandbox = async () => {
     try {
+      setIsCreatingSandbox(true); // Set the loading state
+
       const response = await fetch('/api/createFinchSandbox', {
         method: 'POST',
         headers: {
@@ -71,12 +95,14 @@ export default function Home() {
 
       const data = await response.json();
       console.log(data); // Handle the response as needed
+
       setSandboxCreated(true);
+      setIsCreatingSandbox(false); // Reset the loading state when done
     } catch (error) {
       console.error('Error:', error);
+      setIsCreatingSandbox(false); // Reset the loading state on error
     }
   };
-
   return (
     <div>
       <select value={selectedProvider} onChange={handleProviderChange}>
@@ -87,8 +113,9 @@ export default function Home() {
           </option>
         ))}
       </select>
-      <button onClick={handleCreateSandbox}>Create Finch Sandbox with selected provider</button>
-
+      <button onClick={handleCreateSandbox} disabled={isCreatingSandbox}>
+        {isCreatingSandbox ? 'Creating Sandbox...' : 'Create Finch Sandbox with selected provider'}
+      </button>
       <button onClick={handleFetchCompanyData}>Fetch Company Data</button>
       {!isFetchCompanyDataImplemented && <p>The company data endpoint is not implemented for this provider.</p>}
 
@@ -105,13 +132,54 @@ export default function Home() {
             <p> Try looking up the directory. </p>
           )}
 
-          {companyData ? (
-            <div className={styles.companyData}>
-              {/* Company data rendering */}
-            </div>
-          ) : (
-            <p>Try fetching company data.</p>
-          )}
+{companyData ? (
+        <div className={styles.companyData}>
+          <div>
+  <h1>Company Data</h1>
+  <p><strong>ID:</strong> {companyData.id}</p>
+  <p><strong>Legal Name:</strong> {companyData.legal_name}</p>
+  <p><strong>EIN:</strong> {companyData.ein}</p>
+  <p><strong>Primary Email:</strong> {companyData.primary_email}</p>
+  <p><strong>Primary Phone Number:</strong> {companyData.primary_phone_number}</p>
+
+  <h2>Departments:</h2>
+  <ul>
+    {companyData.departments.map((department, index) => (
+      <li key={index}>{department.name}</li>
+    ))}
+  </ul>
+
+  <h2>Locations:</h2>
+  <ul>
+    {companyData.locations.map((location, index) => (
+      <li key={index}>
+        <strong>Line 1:</strong> {location.line1}<br />
+        <strong>Line 2:</strong> {location.line2}<br />
+        <strong>City:</strong> {location.city}<br />
+        <strong>State:</strong> {location.state}<br />
+        <strong>Postal Code:</strong> {location.postal_code}<br />
+        <strong>Country:</strong> {location.country}<br />
+      </li>
+    ))}
+  </ul>
+
+  <h2>Accounts:</h2>
+  <ul>
+    {companyData.accounts.map((account, index) => (
+      <li key={index}>
+        <strong>Institution Name:</strong> {account.institution_name}<br />
+        <strong>Account Number:</strong> {account.account_number}<br />
+        <strong>Account Type:</strong> {account.account_type}<br />
+        <strong>Routing Number:</strong> {account.routing_number}<br />
+      </li>
+    ))}
+  </ul>
+</div>
+        </div>
+      ) : (
+        <p>Try fetching company data.</p>
+      )}
+           
         </div>
       </div>
     </div>
