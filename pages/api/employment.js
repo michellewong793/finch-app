@@ -30,8 +30,6 @@ export default async function handler(req, res) {
       });
 
       const responseData = await response.json();
-      console.log("employment", responseData)
-
       res.status(response.status).json(responseData);
     } catch (error) {
       console.error('Error:', error);
