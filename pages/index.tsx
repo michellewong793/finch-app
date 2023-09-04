@@ -30,8 +30,6 @@ export default function Home() {
   const [selectedProvider, setSelectedProvider] = useState('');
   const [companyData, setCompanyData] = useState(null);
   const [directoryData, setDirectoryData] = useState(null);
-  const [individualData, setIndividualData] = useState(null);
-  const [employmentData, setEmploymentData] = useState(null);
   const [sandboxCreated, setSandboxCreated] = useState(false);
   const [isFetchCompanyDataImplemented, setIsFetchCompanyDataImplemented] = useState(true);
   const [isFetchCompanyDirectoryImplemented, setIsFetchCompanyDirectoryImplemented] = useState(true);
@@ -133,7 +131,6 @@ export default function Home() {
       {!isFetchCompanyDirectoryImplemented && <p className={styles.error}>The company directory endpoint is not implemented for this provider.</p>}
 
       <div className={styles.actionRow}>
-
       <select  className={styles.button} value={selectedProvider} onChange={handleProviderChange}>
         <option value="">Select a provider</option>
         {providers.map((provider) => (
