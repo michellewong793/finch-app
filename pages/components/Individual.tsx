@@ -3,7 +3,7 @@ import IndividualResults from './IndividualResults';
 import styles from './styles.module.css';
 import IndividualEmploymentDetails from './IndividualEmploymentDetails';
 
-interface Individual {
+export interface Individual {
   id: string;
   first_name: string;
   middle_name: string;
@@ -18,7 +18,7 @@ interface Individual {
 }
 
 // Define an interface for the shape of directoryData
-interface DirectoryData {
+export interface DirectoryData {
   individuals: Individual[];
   // Add other properties if directoryData has more fields
 }

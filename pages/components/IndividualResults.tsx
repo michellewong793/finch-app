@@ -76,7 +76,7 @@ function IndividualResponse({ response }: IndividualResponseProps) {
 }
 
 interface IndividualResponseListProps {
-  responses: {
+  responses?: {
     body: IndividualResponseData;
   }[];
 }
@@ -84,9 +84,13 @@ interface IndividualResponseListProps {
 function IndividualResponseList({ responses }: IndividualResponseListProps) {
   return (
     <div>
-      {responses.map((response, index) => (
-        <IndividualResponse key={index} response={response} />
-      ))}
+      {responses && responses.length > 0 ? (
+        responses.map((response, index) => (
+          <IndividualResponse key={index} response={response} />
+        ))
+      ) : (
+        <p>No individual responses available.</p>
+      )}
     </div>
   );
 }
