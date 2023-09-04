@@ -52,7 +52,7 @@ function Directory({ directoryData }) {
 
   return (
     <>   <div className={styles.flexColumn}>
-      <h1>Directory</h1>
+      <h2>Directory</h2>
       <p>Click on any individual to see more details.</p>
       </div>
     <div className={styles.flexRow}>
@@ -61,9 +61,9 @@ function Directory({ directoryData }) {
       {directoryData ? (
         directoryData.individuals.map((individual, index) => (
           <div key={index}>
-            <h2><a className={styles.link} onClick={() => handleReturnAllInformation(individual)}>
+            <h3><a className={styles.link} onClick={() => handleReturnAllInformation(individual)}>
               
-            Individual {index + 1}</a></h2>
+            Individual {index + 1}</a></h3>
             
             <p><strong>ID:</strong> {individual.id}</p>
             <p><strong>First Name:</strong> {individual.first_name}</p>

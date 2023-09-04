@@ -41,7 +41,7 @@ function IndividualDetails({ responses }) {
           ))}
         </ul>
       ) : (
-        <p>No custom fields available</p>
+        <p className={styles.error}>No custom fields available</p>
       )}
     </div>
   );

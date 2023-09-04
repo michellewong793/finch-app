@@ -122,11 +122,11 @@ export default function Home() {
   return (
     <div className={styles.mainContainer}>
       <Image src="/logo.svg" alt="finch logo" height={100} width={100}/>
-      <h1> Welcome to the Finch sandbox demo! </h1>
-      <a href="https://github.com/michellewong793/finch-app">View Github repository</a>
+      <h1 className={styles.bounce}> Welcome to the Finch sandbox demo! </h1>
+      <a className={styles.bounce} href="https://github.com/michellewong793/finch-app">View code</a>
       <br/>
       <br/>
-      {sandboxCreated ? <p className={styles.success}>Sandbox created! Check out company data, directory for more.</p> : <p>No sandbox created yet. Choose a provider to see more.</p>}
+      {sandboxCreated ? <p className={styles.success}>Created sandbox with <b>{selectedProvider}!</b> Check out company data, directory for more.</p> : <p>No sandbox created yet. Create a sandbox to see more.</p>}
       {companyDataFetched ? <p className={styles.success}>{"Company data fetched!"}</p>: <></>}
       <p className={styles.success}>{companyDirectoryFetched ? "Company directory fetched!" : ""}</p>
       {!isFetchCompanyDataImplemented && <p className={styles.error}>The company data endpoint is not implemented for this provider.</p>}
@@ -143,11 +143,11 @@ export default function Home() {
         ))}
       </select>
       <button className={styles.button} onClick={handleCreateSandbox} disabled={isCreatingSandbox}>
-        {isCreatingSandbox ? 'Creating Sandbox...' : 'Create Finch Sandbox with selected provider'}
+        {isCreatingSandbox ? 'Creating.. please wait a moment :)' : 'Create Sandbox'}
       </button>
-      <button  className={styles.button} onClick={handleFetchCompanyData}>Fetch Company Data</button>
+      <button  className={styles.button} onClick={handleFetchCompanyData}>Get Company Data</button>
 
-      <button  className={styles.button} onClick={handleFetchCompanyDirectory}>Fetch Company Directory</button>
+      <button  className={styles.button} onClick={handleFetchCompanyDirectory}>Get Company Directory</button>
       </div>
       <div className={styles.flexRow}>
         <div className={styles.column}>
@@ -156,21 +156,21 @@ export default function Home() {
 {companyData && (
         <div className={styles.companyData}>
           <div>
-  <h1>Company Data</h1>
+  <h2>Company Data</h2>
   <p><strong>ID:</strong> {companyData.id}</p>
   <p><strong>Legal Name:</strong> {companyData.legal_name}</p>
   <p><strong>EIN:</strong> {companyData.ein}</p>
   <p><strong>Primary Email:</strong> {companyData.primary_email}</p>
   <p><strong>Primary Phone Number:</strong> {companyData.primary_phone_number}</p>
 
-  <h2>Departments:</h2>
+  <h3>Departments:</h3>
   <ul>
     {companyData.departments.map((department, index) => (
       <li key={index}>{department.name}</li>
     ))}
   </ul>
 
-  <h2>Locations:</h2>
+  <h3>Locations:</h3>
   <ul>
     {companyData.locations.map((location, index) => (
       <li key={index}>
@@ -184,7 +184,7 @@ export default function Home() {
     ))}
   </ul>
 
-  <h2>Accounts:</h2>
+  <h3>Accounts:</h3>
   <ul>
     {companyData.accounts.map((account, index) => (
       <li key={index}>
