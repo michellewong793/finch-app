@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Directory from './components/Individual';
 import styles from './components/styles.module.css'
+import Image from 'next/image'
 
 const providers = ['gusto', 'adp_run', 'bamboo_hr', 'bamboo_hr_api', 'bob', 'humaans', 'insperity', "justworks",
 "namely",
@@ -35,11 +36,24 @@ export default function Home() {
   const [isFetchCompanyDataImplemented, setIsFetchCompanyDataImplemented] = useState(true);
   const [isFetchCompanyDirectoryImplemented, setIsFetchCompanyDirectoryImplemented] = useState(true);
   const [isCreatingSandbox, setIsCreatingSandbox] = useState(false);
+  const [companyDataFetched, setCompanyDataFetched] = useState(false);
+  const [companyDirectoryFetched, setCompanyDirectoryFetched] = useState(false);
 
+
+
+  const clearData = () => {
+    setCompanyData(null);
+    setDirectoryData(null);
+    setCompanyDataFetched(false);
+    setCompanyDirectoryFetched(false);
+    setSandboxCreated(false);
+  };
 
   const handleProviderChange = (event) => {
     setSelectedProvider(event.target.value);
+    clearData(); // Clear data when a new provider is selected
   };
+
 
   const handleFetchCompanyData = async () => {
     try {
@@ -53,6 +67,7 @@ export default function Home() {
         setIsFetchCompanyDataImplemented(true);
         const responseData = await response.json();
         setCompanyData(responseData);
+        setCompanyDataFetched(true);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -71,6 +86,7 @@ export default function Home() {
         setIsFetchCompanyDirectoryImplemented(true);
         const responseData = await response.json();
         setDirectoryData(responseData);
+        setCompanyDirectoryFetched(true);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -105,11 +121,16 @@ export default function Home() {
   };
   return (
     <div className={styles.mainContainer}>
+      <Image src="/logo.svg" alt="finch logo" height={100} width={100}/>
       <h1> Welcome to the Finch sandbox demo! </h1>
       <a href="https://github.com/michellewong793/finch-app">View Github repository</a>
       <br/>
       <br/>
-      {sandboxCreated ? <p>Sandbox Successfully Created! Check out company data, directory for more.</p> : <p>No sandbox created yet. Choose a provider to see more.</p>}
+      {sandboxCreated ? <p className={styles.success}>Sandbox created! Check out company data, directory for more.</p> : <p>No sandbox created yet. Choose a provider to see more.</p>}
+      {companyDataFetched ? <p className={styles.success}>{"Company data fetched!"}</p>: <></>}
+      <p className={styles.success}>{companyDirectoryFetched ? "Company directory fetched!" : ""}</p>
+      {!isFetchCompanyDataImplemented && <p className={styles.error}>The company data endpoint is not implemented for this provider.</p>}
+      {!isFetchCompanyDirectoryImplemented && <p className={styles.error}>The company directory endpoint is not implemented for this provider.</p>}
 
       <div className={styles.actionRow}>
 
@@ -125,16 +146,14 @@ export default function Home() {
         {isCreatingSandbox ? 'Creating Sandbox...' : 'Create Finch Sandbox with selected provider'}
       </button>
       <button  className={styles.button} onClick={handleFetchCompanyData}>Fetch Company Data</button>
-      {!isFetchCompanyDataImplemented && <p>The company data endpoint is not implemented for this provider.</p>}
 
       <button  className={styles.button} onClick={handleFetchCompanyDirectory}>Fetch Company Directory</button>
-      {!isFetchCompanyDirectoryImplemented && <p>The company directory endpoint is not implemented for this provider.</p>}
       </div>
       <div className={styles.flexRow}>
         <div className={styles.column}>
 
         
-{companyData ? (
+{companyData && (
         <div className={styles.companyData}>
           <div>
   <h1>Company Data</h1>
@@ -178,13 +197,9 @@ export default function Home() {
   </ul>
 </div>
         </div>
-      ) : (
-        <p>Try fetching company data.</p>
       )}
-        {directoryData ? (
+        {directoryData && (
             <Directory directoryData={directoryData} />
-          ) : (
-            <p> Try looking up the directory. </p>
           )}
 
            

@@ -13,8 +13,26 @@
     justify-content: space-between;
 }
 
+.error {
+    color: red;
+}
+
+.success {
+    color: green; 
+}
+
 .button {
-    padding: 0.5rem;
+    padding: 0.5em;
+    border-radius: 8px;
+    border: 2px solid #161616;
+    font-size: 15px;
+}
+
+.button:hover {
+    background-color: #3e4ae7;
+    border-color: #3e4ae7;
+    color: white;
+    transition: background-color .3s;
 }
 
 .flexColumn {
