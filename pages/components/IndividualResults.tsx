@@ -2,7 +2,43 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function IndividualResponse({ response }) {
+// Define an interface for the shape of an individual's email or phone number
+interface ContactInfo {
+  data: string;
+  type: string;
+}
+
+// Define an interface for the shape of an individual's residence
+interface Residence {
+  line1: string;
+  line2: string;
+  city: string;
+  state: string;
+  postal_code: string;
+  country: string;
+}
+
+// Define an interface for the shape of an individual's response
+interface IndividualResponseData {
+  id: string;
+  first_name: string;
+  middle_name: string;
+  last_name: string;
+  dob: string;
+  gender: string;
+  emails: ContactInfo[];
+  phone_numbers: ContactInfo[];
+  residence: Residence;
+}
+
+// Define the props interface for the IndividualResponse component
+interface IndividualResponseProps {
+  response: {
+    body: IndividualResponseData;
+  };
+}
+
+function IndividualResponse({ response }: IndividualResponseProps) {
   const individual = response.body;
 
   return (
@@ -39,7 +75,13 @@ function IndividualResponse({ response }) {
   );
 }
 
-function IndividualResponseList({ responses }) {
+interface IndividualResponseListProps {
+  responses: {
+    body: IndividualResponseData;
+  }[];
+}
+
+function IndividualResponseList({ responses }: IndividualResponseListProps) {
   return (
     <div>
       {responses.map((response, index) => (

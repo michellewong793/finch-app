@@ -3,13 +3,32 @@ import IndividualResults from './IndividualResults';
 import styles from './styles.module.css';
 import IndividualEmploymentDetails from './IndividualEmploymentDetails';
 
+interface Individual {
+  id: string;
+  first_name: string;
+  middle_name: string;
+  last_name: string;
+  manager: {
+    id: string;
+  };
+  department: {
+    name: string;
+  };
+  is_active: boolean;
+}
 
-function Directory({ directoryData }) {
-  const [selectedIndividual, setSelectedIndividual] = useState(null);
+// Define an interface for the shape of directoryData
+interface DirectoryData {
+  individuals: Individual[];
+  // Add other properties if directoryData has more fields
+}
+
+function Directory({ directoryData }: { directoryData: DirectoryData }) {
+  const [selectedIndividual, setSelectedIndividual] = useState<Individual | null>(null);
   const [individualData, setIndividualData] = useState(null)
   const [employmentDetails, setEmploymentDetails] = useState(null)
 
-  const handleReturnAllInformation = async (individual) => {
+  const handleReturnAllInformation = async (individual: Individual) => {
     if (directoryData.individuals.some((i) => i.id === individual.id)) {
       setSelectedIndividual(individual);
   
@@ -57,7 +76,7 @@ function Directory({ directoryData }) {
       </div>
     <div className={styles.flexRow}>
       
-      <div className={[styles.directory]}>
+      <div className={styles.directory}>
       {directoryData ? (
         directoryData.individuals.map((individual, index) => (
           <div key={index}>

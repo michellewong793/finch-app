@@ -1,6 +1,55 @@
 import React from 'react';
 import styles from './styles.module.css'
-function IndividualDetails({ responses }) {
+
+interface IndividualDetailsProps {
+  responses: {
+    body: {
+      id: string;
+      first_name: string;
+      middle_name: string;
+      last_name: string;
+      title: string;
+      manager: {
+        id: string;
+      };
+      employment: {
+        type: string;
+      };
+      department: {
+        name: string;
+      };
+      start_date: string;
+      end_date?: string;
+      is_active: boolean;
+      class_code: string;
+      location: {
+        line1: string;
+        line2: string;
+        city: string;
+        state: string;
+        postal_code: string;
+        country: string;
+      };
+      income: {
+        amount: number;
+        currency: string;
+        unit: string;
+      };
+      income_history?: {
+        amount: number;
+        currency: string;
+        unit: string;
+        effective_date: string;
+      }[];
+      custom_fields: {
+        name: string;
+        value: string;
+      }[] | null;
+    };
+  };
+}
+
+function IndividualDetails({ responses }: IndividualDetailsProps) {
   const individual = responses.body
 
 
