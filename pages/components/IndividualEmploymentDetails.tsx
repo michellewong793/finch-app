@@ -75,7 +75,7 @@ function IndividualDetails({ responses }: IndividualDetailsProps) {
       <p><strong>Income:</strong> {individual.income.amount ?? 'N/A'} {individual.income.currency ?? 'N/A'} per {individual.income.unit ?? 'N/A'}</p>
       
       <h3>Income History</h3>
-      {individual.income_history !== undefined && individual.income_history !== null && (
+      {individual.income_history !== undefined && individual.income_history !== null ? (
         <ul>
           {individual.income_history.map((income, index) => (
             <li key={index}>
@@ -83,7 +83,7 @@ function IndividualDetails({ responses }: IndividualDetailsProps) {
             </li>
           ))}
         </ul>
-      )}
+      ) : <p> No income history available </p>}
       
       <h3>Custom Fields</h3>
       {individual.custom_fields !== undefined && individual.custom_fields !== null && individual.custom_fields.length > 0 ? (

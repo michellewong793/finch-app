@@ -74,7 +74,7 @@ function IndividualResponse({ response }: IndividualResponseProps) {
       <li key={index}>{phone ? `${phone.data} (${phone.type})` : "N/A"}</li>
     ))
   ) : (
-    <li>No phone numbers available</li>
+    <p>No phone numbers available</p>
   )}
 </ul>
 
