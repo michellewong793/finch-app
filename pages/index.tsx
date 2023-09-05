@@ -60,8 +60,6 @@ export default function Home() {
   const [isCreatingSandbox, setIsCreatingSandbox] = useState<boolean>(false);
   const [isFetchingCompanyData, setIsFetchingCompanyData] = useState<boolean>(false);
   const [isFetchingCompanyDirectory, setIsFetchingCompanyDirectory] = useState<boolean>(false);
-
-
   const [companyDataFetched, setCompanyDataFetched] = useState<boolean>(false); 
   const [companyDirectoryFetched, setCompanyDirectoryFetched] = useState<boolean>(false); 
 

@@ -95,7 +95,7 @@ function IndividualDetails({ responses }: IndividualDetailsProps) {
           ))}
         </ul>
       ) : (
-        <p className={styles.error}>N/A</p>
+        <p>N/A</p>
       )}
           
     </div>
