@@ -89,6 +89,7 @@ export default function Home() {
 
       if (response.status === 501) {
         setIsFetchCompanyDataImplemented(false);
+        setIsFetchingCompanyData(false); // Set the loading state
       } else {
         setIsFetchCompanyDataImplemented(true);
         const responseData = await response.json();
@@ -112,6 +113,7 @@ export default function Home() {
 
       if (response.status === 501) {
         setIsFetchCompanyDirectoryImplemented(false);
+        setIsFetchingCompanyDirectory(false); // Set the loading state
       } else {
         setIsFetchCompanyDirectoryImplemented(true);
         const responseData = await response.json();
