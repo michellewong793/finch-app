@@ -71,6 +71,9 @@ export default function Home() {
     setCompanyDataFetched(false);
     setCompanyDirectoryFetched(false);
     setSandboxCreated(false);
+    setIsFetchCompanyDataImplemented(true);
+    setIsFetchCompanyDirectoryImplemented(true);
+
   };
 
   const handleProviderChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
