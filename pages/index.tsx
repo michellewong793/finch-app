@@ -174,7 +174,7 @@ export default function Home() {
         <div className={styles.column}>
 
         
-        {companyData && (
+        {companyData != null && (
   <div className={styles.companyData}>
     <div>
       <h2>Company Data</h2>
@@ -186,14 +186,14 @@ export default function Home() {
 
       <h3>Departments:</h3>
       <ul>
-        {companyData.departments.map((department, index) => (
+        {companyData != null ? companyData.departments.map((department, index) => (
           <li key={index}>{department.name}</li>
-        ))}
+        )) : <p> No department data found</p>}
       </ul>
 
       <h3>Locations:</h3>
       <ul>
-        {companyData.locations.map((location, index) => (
+        {companyData != null ? companyData.locations.map((location, index) => (
           <li key={index}>
             <strong>Line 1:</strong> {location.line1}<br />
             <strong>Line 2:</strong> {location.line2}<br />
@@ -202,24 +202,24 @@ export default function Home() {
             <strong>Postal Code:</strong> {location.postal_code}<br />
             <strong>Country:</strong> {location.country}<br />
           </li>
-        ))}
+        )) : <p> No company location data found</p>}
       </ul>
 
       <h3>Accounts:</h3>
       <ul>
-        {companyData.accounts.map((account, index) => (
+        {companyData != null ? companyData.accounts.map((account, index) => (
           <li key={index}>
             <strong>Institution Name:</strong> {account.institution_name}<br />
             <strong>Account Number:</strong> {account.account_number}<br />
             <strong>Account Type:</strong> {account.account_type}<br />
             <strong>Routing Number:</strong> {account.routing_number}<br />
           </li>
-        ))}
+        )) : <p> No company account data found </p>}
       </ul>
     </div>
   </div>
 )}
-     {directoryData && <Directory directoryData={directoryData} />}
+     {directoryData != null && <Directory directoryData={directoryData} />}
 
 
            
