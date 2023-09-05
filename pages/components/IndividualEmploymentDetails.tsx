@@ -86,7 +86,7 @@ function IndividualDetails({ responses }: IndividualDetailsProps) {
       )}
       
       <h3>Custom Fields</h3>
-      {individual.custom_fields !== undefined && individual.custom_fields !== null ? (
+      {individual.custom_fields !== undefined && individual.custom_fields !== null && individual.custom_fields.length > 0 ? (
         <ul>
           {individual.custom_fields.map((field, index) => (
             <li key={index}>
@@ -95,7 +95,7 @@ function IndividualDetails({ responses }: IndividualDetailsProps) {
           ))}
         </ul>
       ) : (
-        <p className={styles.error}>No custom fields available</p>
+        <p className={styles.error}>N/A</p>
       )}
           
     </div>
