@@ -73,7 +73,6 @@ export default function Home() {
     setSandboxCreated(false);
     setIsFetchCompanyDataImplemented(true);
     setIsFetchCompanyDirectoryImplemented(true);
-
   };
 
   const handleProviderChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -159,8 +158,6 @@ export default function Home() {
     <div className={styles.mainContainer}>
       <Image src="/logo.svg" alt="finch logo" height={100} width={100}/>
       <h1 className={styles.bounce}> Welcome to the Finch sandbox demo! </h1>
-      <a className={styles.bounce} href="https://github.com/michellewong793/finch-app">View code</a>
-      <br/>
       <br/>
       {sandboxCreated ? <p className={styles.success}>Created sandbox with <b>{selectedProvider}!</b> Check out company data, directory for more.</p> : <p>No sandbox created yet. Create a sandbox to see more.</p>}
       {companyDataFetched ? <p className={styles.success}>{"Company data fetched!"}</p>: <></>}
@@ -239,7 +236,7 @@ export default function Home() {
      {directoryData != null && <Directory directoryData={directoryData} />}
 
 
-           
+
         </div>
       </div>
     </div>
