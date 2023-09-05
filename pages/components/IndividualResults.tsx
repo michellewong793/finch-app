@@ -20,7 +20,7 @@ interface Residence {
 
 // Define an interface for the shape of an individual's response
 interface IndividualResponseData {
-  id: string;
+  id: string | null;
   first_name: string | null; // Update to accept null values
   middle_name: string | null; // Update to accept null values
   last_name: string | null; // Update to accept null values
@@ -48,7 +48,7 @@ function IndividualResponse({ response }: IndividualResponseProps) {
   return (
     <div className={styles.individualResults}>
       <h2>Individual Information</h2>
-      <p><strong>ID:</strong> {individual.id}</p>
+      <p><strong>ID:</strong> {individual.id || "N/A"}</p>
       <p><strong>First Name:</strong> {individual.first_name || "N/A"}</p>
       <p><strong>Middle Name:</strong> {individual.middle_name || "N/A"}</p>
       <p><strong>Last Name:</strong> {individual.last_name || "N/A"}</p>
@@ -56,7 +56,7 @@ function IndividualResponse({ response }: IndividualResponseProps) {
       <p><strong>Gender:</strong> {individual.gender || "N/A"}</p>
 
       <h3>Emails</h3>
-      {individual.emails.length > 0 ? (
+      {individual.emails !== null && individual.emails.length > 0 ? (
         <ul>
           {individual.emails.map((email, index) => (
             <li key={index}>{email ? `${email.data} (${email.type})` : "N/A"}</li>
@@ -69,10 +69,14 @@ function IndividualResponse({ response }: IndividualResponseProps) {
 
       <h3>Phone Numbers</h3>
       <ul>
-        {individual.phone_numbers.map((phone, index) => (
-          <li key={index}>{phone ? `${phone.data} (${phone.type})` : "N/A"}</li>
-        ))}
-      </ul>
+  {individual && individual.phone_numbers ? (
+    individual.phone_numbers.map((phone, index) => (
+      <li key={index}>{phone ? `${phone.data} (${phone.type})` : "N/A"}</li>
+    ))
+  ) : (
+    <li>No phone numbers available</li>
+  )}
+</ul>
 
       <h3>Residence</h3>
       <p><strong>Address:</strong> {individual.residence.line1 || "N/A"}, {individual.residence.line2 || "N/A"}</p>

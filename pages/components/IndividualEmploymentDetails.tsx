@@ -60,19 +60,19 @@ function IndividualDetails({ responses }: IndividualDetailsProps) {
 
       <h2>Employment Information</h2>
       <p><strong>ID:</strong> {individual.id ?? 'N/A'}</p>
-      <p><strong>First Name:</strong> {individual.first_name}</p>
+      <p><strong>First Name:</strong> {individual.first_name ?? 'N/A'}</p>
       <p><strong>Middle Name:</strong> {individual.middle_name ?? 'N/A'}</p>
-      <p><strong>Last Name:</strong> {individual.last_name}</p>
-      <p><strong>Title:</strong> {individual.title}</p>
+      <p><strong>Last Name:</strong> {individual.last_name ?? 'N/A'}</p>
+      <p><strong>Title:</strong> {individual.title ?? 'N/A'}</p>
       <p><strong>Manager ID:</strong> {individual.manager.id ?? 'N/A'}</p>
-      <p><strong>Employment Type:</strong> {individual.employment.type}</p>
+      <p><strong>Employment Type:</strong> {individual.employment.type ?? 'N/A'}</p>
       <p><strong>Department Name:</strong> {individual.department.name ?? 'N/A'}</p>
-      <p><strong>Start Date:</strong> {individual.start_date}</p>
+      <p><strong>Start Date:</strong> {individual.start_date ?? 'N/A'}</p>
       <p><strong>End Date:</strong> {individual.end_date ?? 'N/A'}</p>
       <p><strong>Is Active:</strong> {individual.is_active ? 'Yes' : 'No'}</p>
       <p><strong>Class Code:</strong> {individual.class_code ?? 'N/A'}</p> {/* Updated line */}
       <p><strong>Location:</strong> {individual.location.line1 ?? 'N/A'}, {individual.location.line2 ?? 'N/A'}, {individual.location.city ?? 'N/A'}, {individual.location.state ?? 'N/A'}, {individual.location.postal_code ?? 'N/A'}, {individual.location.country ?? 'N/A'}</p>
-      <p><strong>Income:</strong> {individual.income.amount} {individual.income.currency} per {individual.income.unit}</p>
+      <p><strong>Income:</strong> {individual.income.amount ?? 'N/A'} {individual.income.currency ?? 'N/A'} per {individual.income.unit ?? 'N/A'}</p>
       
       <h3>Income History</h3>
       {individual.income_history !== undefined && individual.income_history !== null && (
