@@ -88,6 +88,7 @@ export default function Home() {
       } else {
         setIsFetchCompanyDataImplemented(true);
         const responseData = await response.json();
+        console.log("company data", responseData)
         setCompanyData(responseData);
         setCompanyDataFetched(true);
       }
@@ -174,7 +175,7 @@ export default function Home() {
         <div className={styles.column}>
 
         
-        {companyData != null && (
+        {companyData !== null && (
   <div className={styles.companyData}>
     <div>
       <h2>Company Data</h2>
@@ -186,14 +187,14 @@ export default function Home() {
 
       <h3>Departments:</h3>
       <ul>
-        {companyData != null ? companyData.departments.map((department, index) => (
-          <li key={index}>{department.name}</li>
+        {companyData.departments !== null ? companyData.departments.map((department, index) => (
+          <li key={index}>{department.name || 'N/A'}</li>
         )) : <p> No department data found</p>}
       </ul>
 
       <h3>Locations:</h3>
       <ul>
-        {companyData != null ? companyData.locations.map((location, index) => (
+        {companyData.locations !== null ? companyData.locations.map((location, index) => (
           <li key={index}>
             <strong>Line 1:</strong> {location.line1}<br />
             <strong>Line 2:</strong> {location.line2}<br />
@@ -207,7 +208,7 @@ export default function Home() {
 
       <h3>Accounts:</h3>
       <ul>
-        {companyData != null ? companyData.accounts.map((account, index) => (
+        {companyData.accounts !== null ? companyData.accounts.map((account, index) => (
           <li key={index}>
             <strong>Institution Name:</strong> {account.institution_name}<br />
             <strong>Account Number:</strong> {account.account_number}<br />
