@@ -69,12 +69,12 @@ function IndividualResponse({ response }: IndividualResponseProps) {
 
       <h3>Phone Numbers</h3>
       <ul>
-  {individual && individual.phone_numbers ? (
+  {individual !== null && individual.phone_numbers ? (
     individual.phone_numbers.map((phone, index) => (
       <li key={index}>{phone ? `${phone.data} (${phone.type})` : "N/A"}</li>
     ))
   ) : (
-    <p>No phone numbers available</p>
+   <li> <p>No phone numbers available</p></li>
   )}
 </ul>
 

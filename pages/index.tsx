@@ -58,6 +58,10 @@ export default function Home() {
   const [isFetchCompanyDataImplemented, setIsFetchCompanyDataImplemented] = useState<boolean>(true); 
   const [isFetchCompanyDirectoryImplemented, setIsFetchCompanyDirectoryImplemented] = useState<boolean>(true); 
   const [isCreatingSandbox, setIsCreatingSandbox] = useState<boolean>(false);
+  const [isFetchingCompanyData, setIsFetchingCompanyData] = useState<boolean>(false);
+  const [isFetchingCompanyDirectory, setIsFetchingCompanyDirectory] = useState<boolean>(false);
+
+
   const [companyDataFetched, setCompanyDataFetched] = useState<boolean>(false); 
   const [companyDirectoryFetched, setCompanyDirectoryFetched] = useState<boolean>(false); 
 
@@ -79,6 +83,8 @@ export default function Home() {
 
   const handleFetchCompanyData = async () => {
     try {
+      setIsFetchingCompanyData(true); // Set the loading state
+
       const response = await fetch('/api/fetchCompanyData', {
         method: 'GET',
       });
@@ -91,6 +97,7 @@ export default function Home() {
         console.log("company data", responseData)
         setCompanyData(responseData);
         setCompanyDataFetched(true);
+        setIsFetchingCompanyData(false); // Set the loading state
       }
     } catch (error) {
       console.error('Error:', error);
@@ -99,6 +106,8 @@ export default function Home() {
 
   const handleFetchCompanyDirectory = async () => {
     try {
+      setIsFetchingCompanyDirectory(true); // Set the loading state
+
       const response = await fetch('/api/fetchCompanyDirectory', {
         method: 'GET',
       });
@@ -110,6 +119,7 @@ export default function Home() {
         const responseData = await response.json();
         setDirectoryData(responseData);
         setCompanyDirectoryFetched(true);
+        setIsFetchingCompanyDirectory(false); // Set the loading state
       }
     } catch (error) {
       console.error('Error:', error);
@@ -167,9 +177,12 @@ export default function Home() {
       <button className={styles.button} onClick={handleCreateSandbox} disabled={isCreatingSandbox}>
         {isCreatingSandbox ? 'Creating.. please wait a moment :)' : 'Create Sandbox'}
       </button>
-      <button  className={styles.button} onClick={handleFetchCompanyData}>Get Company Data</button>
+      <button  className={styles.button} onClick={handleFetchCompanyData} disabled={isFetchingCompanyData}>   {isFetchingCompanyData ? 'Loading.. please wait a moment :)' : 'Get Company Data'}
+</button>
 
-      <button  className={styles.button} onClick={handleFetchCompanyDirectory}>Get Company Directory</button>
+      <button className={styles.button} onClick={handleFetchCompanyDirectory} disabled={isFetchingCompanyDirectory}> 
+      {isFetchingCompanyDirectory ? 'Loading.. please wait a moment :)' : 'Get Company Directory'}
+      </button>
       </div>
       <div className={styles.flexRow}>
         <div className={styles.column}>

@@ -88,7 +88,7 @@ function Directory({ directoryData }: { directoryData: DirectoryData }) {
             <p><strong>First Name:</strong> {individual.first_name}</p>
             <p><strong>Middle Name:</strong> {individual.middle_name}</p>
             <p><strong>Last Name:</strong> {individual.last_name}</p>
-            <p><strong>Manager ID:</strong> {individual.manager.id}</p>
+            <p><strong>Manager ID:</strong> {individual.manager.id || "n/a"}</p>
             <p><strong>Department Name:</strong> {individual.department.name}</p>
             <p><strong>Is Active:</strong> {individual.is_active ? 'Yes' : 'No'}</p>
           </div>
