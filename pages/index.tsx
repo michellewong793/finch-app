@@ -5,25 +5,25 @@ import styles from './components/styles.module.css'
 import Image from 'next/image'
 
 interface CompanyData {
-  id: string;
-  legal_name: string;
-  ein: string;
-  primary_email: string;
-  primary_phone_number: string;
-  departments: Array<{ name: string }>;
+  id: string | null | undefined;
+  legal_name: string | null | undefined;
+  ein: string | null | undefined;
+  primary_email: string | null | undefined;
+  primary_phone_number: string | null | undefined;
+  departments: Array<{ name: string | null | undefined }>;
   locations: Array<{
-    line1: string;
-    line2: string;
-    city: string;
-    state: string;
-    postal_code: string;
-    country: string;
+    line1: string | null | undefined;
+    line2: string | null | undefined;
+    city: string | null | undefined;
+    state: string | null | undefined;
+    postal_code: string | null | undefined;
+    country: string | null | undefined;
   }>;
   accounts: Array<{
-    institution_name: string;
-    account_number: string;
-    account_type: string;
-    routing_number: string;
+    institution_name: string | null | undefined;
+    account_number: string | null | undefined;
+    account_type: string | null | undefined;
+    routing_number: string | null | undefined;
   }>;
 }
 
@@ -178,12 +178,12 @@ export default function Home() {
         {companyData !== null && (
   <div className={styles.companyData}>
     <div>
-      <h2>Company Data</h2>
-      <p><strong>ID:</strong> {companyData.id}</p>
-      <p><strong>Legal Name:</strong> {companyData.legal_name}</p>
-      <p><strong>EIN:</strong> {companyData.ein}</p>
-      <p><strong>Primary Email:</strong> {companyData.primary_email}</p>
-      <p><strong>Primary Phone Number:</strong> {companyData.primary_phone_number}</p>
+    <h2>Company Data</h2>
+                <p><strong>ID:</strong> {companyData.id || 'N/A'}</p>
+                <p><strong>Legal Name:</strong> {companyData.legal_name || 'N/A'}</p>
+                <p><strong>EIN:</strong> {companyData.ein || 'N/A'}</p>
+                <p><strong>Primary Email:</strong> {companyData.primary_email || 'N/A'}</p>
+                <p><strong>Primary Phone Number:</strong> {companyData.primary_phone_number || 'N/A'}</p>
 
       <h3>Departments:</h3>
       <ul>
@@ -195,14 +195,14 @@ export default function Home() {
       <h3>Locations:</h3>
       <ul>
         {companyData.locations !== null ? companyData.locations.map((location, index) => (
-          <li key={index}>
-            <strong>Line 1:</strong> {location.line1}<br />
-            <strong>Line 2:</strong> {location.line2}<br />
-            <strong>City:</strong> {location.city}<br />
-            <strong>State:</strong> {location.state}<br />
-            <strong>Postal Code:</strong> {location.postal_code}<br />
-            <strong>Country:</strong> {location.country}<br />
-          </li>
+           <li key={index}>
+           <strong>Line 1:</strong> {location.line1 || 'N/A'}<br />
+           <strong>Line 2:</strong> {location.line2 || 'N/A'}<br />
+           <strong>City:</strong> {location.city || 'N/A'}<br />
+           <strong>State:</strong> {location.state || 'N/A'}<br />
+           <strong>Postal Code:</strong> {location.postal_code || 'N/A'}<br />
+           <strong>Country:</strong> {location.country || 'N/A'}<br />
+         </li>
         )) : <p> No company location data found</p>}
       </ul>
 

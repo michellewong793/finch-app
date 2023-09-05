@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 interface IndividualDetailsProps {
   responses?: {
     body: {
-      id: string;
+      id: string | null | undefined;
       first_name: string;
       middle_name?: string | null | undefined;
       last_name: string;
@@ -16,19 +16,19 @@ interface IndividualDetailsProps {
         type: string;
       };
       department: {
-        name: string;
+        name: string | null | undefined;
       };
       start_date: string;
       end_date?: string | null | undefined;
       is_active: boolean;
-      class_code: string;
+      class_code: string | null | undefined; // Updated type
       location: {
-        line1: string;
+        line1: string | null | undefined;
         line2?: string | null | undefined;
-        city: string;
-        state: string;
-        postal_code: string;
-        country: string;
+        city: string | null | undefined;
+        state: string | null | undefined;
+        postal_code: string | null | undefined;
+        country: string | null | undefined;
       };
       income: {
         amount: number;
@@ -59,19 +59,19 @@ function IndividualDetails({ responses }: IndividualDetailsProps) {
     <div className={styles.individualResults}>
 
       <h2>Employment Information</h2>
-      <p><strong>ID:</strong> {individual.id}</p>
+      <p><strong>ID:</strong> {individual.id ?? 'N/A'}</p>
       <p><strong>First Name:</strong> {individual.first_name}</p>
-      <p><strong>Middle Name:</strong> {individual.middle_name ?? 'N/A'}</p> {/* Updated line */}
+      <p><strong>Middle Name:</strong> {individual.middle_name ?? 'N/A'}</p>
       <p><strong>Last Name:</strong> {individual.last_name}</p>
       <p><strong>Title:</strong> {individual.title}</p>
-      <p><strong>Manager ID:</strong> {individual.manager.id}</p>
+      <p><strong>Manager ID:</strong> {individual.manager.id ?? 'N/A'}</p>
       <p><strong>Employment Type:</strong> {individual.employment.type}</p>
-      <p><strong>Department Name:</strong> {individual.department.name}</p>
+      <p><strong>Department Name:</strong> {individual.department.name ?? 'N/A'}</p>
       <p><strong>Start Date:</strong> {individual.start_date}</p>
-      <p><strong>End Date:</strong> {individual.end_date ?? 'N/A'}</p> {/* Updated line */}
+      <p><strong>End Date:</strong> {individual.end_date ?? 'N/A'}</p>
       <p><strong>Is Active:</strong> {individual.is_active ? 'Yes' : 'No'}</p>
-      <p><strong>Class Code:</strong> {individual.class_code}</p>
-      <p><strong>Location:</strong> {individual.location.line1}, {individual.location.line2 ?? ''}, {individual.location.city}, {individual.location.state}, {individual.location.postal_code}, {individual.location.country}</p>
+      <p><strong>Class Code:</strong> {individual.class_code ?? 'N/A'}</p> {/* Updated line */}
+      <p><strong>Location:</strong> {individual.location.line1 ?? 'N/A'}, {individual.location.line2 ?? 'N/A'}, {individual.location.city ?? 'N/A'}, {individual.location.state ?? 'N/A'}, {individual.location.postal_code ?? 'N/A'}, {individual.location.country ?? 'N/A'}</p>
       <p><strong>Income:</strong> {individual.income.amount} {individual.income.currency} per {individual.income.unit}</p>
       
       <h3>Income History</h3>
